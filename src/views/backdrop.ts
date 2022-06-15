@@ -1,12 +1,10 @@
-
-
 export type BackdropConfig = {
   id: string,
   name: string,
   title: string,
 }
 
-export const createBackdrop = (config: BackdropConfig): HTMLIFrameElement => {
+const Backdrop = (config: BackdropConfig): HTMLIFrameElement => {
   const el = document.createElement('iframe');
 
   el.style.display = "block";
@@ -31,7 +29,7 @@ export const createBackdrop = (config: BackdropConfig): HTMLIFrameElement => {
   el.setAttribute("id", config.id);
   el.setAttribute("name", config.name);
   el.setAttribute("title", config.title);
-
-
   return el;
 }
+
+export default Backdrop;
