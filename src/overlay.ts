@@ -6,12 +6,7 @@ import {
   createMessage,
   createModal
 } from "./styles";
-
-
-export interface OverlayProps {
-  focus: () => void;
-  close: () => void;
-}
+import {OverlayProps} from "./types";
 
 export const createOverlay = ({ focus, close }: OverlayProps) => {
   const container = createContainer();

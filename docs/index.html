@@ -16,21 +16,33 @@
   <title>Bava Checkout SDK</title>
 
   <style>
+    body { padding: 0 }
     .container {
       display: grid;
       grid-template-columns: 1fr;
-      grid-template-rows: 1fr;
+      grid-template-rows: 90px 1fr;
       grid-column-gap: 0px;
       grid-row-gap: 0px;
       height: 100vh;
-      width: 100%;
+      max-width: 400px;
       justify-content: center;
       align-content: center;
+      margin: 0 auto;
     }
 
-    .container > form, .container > div {
+    .container > form {
       text-align: center;
       padding: 30px;
+    }
+
+    .container > form > input {
+      width: 200px;
+    }
+
+    .container > div > pre {
+      background-color: beige;
+      padding: 15px;
+      border: solid 2px burlywood;
     }
   </style>
 </head>
@@ -39,9 +51,28 @@
 
 <div class="container">
   <form id="form">
-    <input type="url" id="target" value="https://pay.stg.bavabank.com/payment-link/index.html#/">
+    <input type="text" id="target" value="bcd4d391-cbc3-4fa1-9b1c-d4f72196c4b5" placeholder="00000000-0000-0000-0000-000000000000" required>
     <button type="submit">Testar</button>
   </form>
+  <div>
+<pre>
+  form.onsubmit = function _onsubmit(e) {
+    e.preventDefault();
+
+    BavaCheckout.setEnvironment('staging');
+    BavaCheckout.open({
+      onClose: () => {
+        alert("BavaCheckoutOpen: is closed")
+      },
+    });
+
+    // Make ajax to backend and retrive invoice id
+    setTimeout(() => {
+      BavaCheckout.checkout(target.value);
+    }, 2000);
+  }
+</pre>
+  </div>
 </div>
 
 <script type="module" src="checkout.umd.js"></script>
@@ -52,12 +83,17 @@
   form.onsubmit = function _onsubmit(e) {
     e.preventDefault();
 
-    BavaCheckoutOpen({
-      target: target.value,
+    BavaCheckout.setEnvironment('staging');
+    BavaCheckout.open({
       onClose: () => {
         alert("BavaCheckoutOpen: is closed")
-      }
+      },
     });
+
+    // Make ajax to backend and retrive invoice id
+    setTimeout(() => {
+      BavaCheckout.checkout(target.value);
+    }, 2000);
   };
 </script>
 </body>
