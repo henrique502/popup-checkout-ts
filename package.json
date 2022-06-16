@@ -7,10 +7,10 @@
     "node": ">=16.14.0"
   },
   "files": [
-    "dist"
+    "docs/dist"
   ],
-  "main": "./dist/checkout.umd.js",
-  "module": "./dist/checkout.es.js",
+  "main": "docs/dist/checkout.umd.js",
+  "module": "docs/dist/checkout.es.js",
   "exports": {
     ".": {
       "import": "./dist/checkout.es.js",
