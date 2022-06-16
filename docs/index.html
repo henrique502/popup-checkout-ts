@@ -19,7 +19,7 @@
     .container {
       display: grid;
       grid-template-columns: 1fr;
-      grid-template-rows: 70px 1fr;
+      grid-template-rows: 1fr;
       grid-column-gap: 0px;
       grid-row-gap: 0px;
       height: 100vh;
@@ -42,20 +42,10 @@
     <input type="url" id="target" value="https://pay.stg.bavabank.com/payment-link/index.html#/">
     <button type="submit">Testar</button>
   </form>
-
-  <div class="mermaid">
-    sequenceDiagram
-      Alice->>+John: Hello John, how are you?
-      Alice->>+John: John, can you hear me?
-      John-->>-Alice: Hi Alice, I can hear you!
-      John-->>-Alice: I feel great!
-  </div>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
 <script type="module" src="checkout.umd.js"></script>
 <script>
-  mermaid.initialize({ startOnLoad: true });
   const form = document.getElementById("form");
   const target = document.getElementById("target");
 
