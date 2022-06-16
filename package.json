@@ -9,7 +9,7 @@
   "files": [
     "docs/dist"
   ],
-  "main": "docs/dist/checkout.umd.js",
+  "main": "docs/checkout.umd.js",
   "module": "docs/dist/checkout.es.js",
   "exports": {
     ".": {
