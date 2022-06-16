@@ -4,31 +4,19 @@ import ReactDOM from 'react-dom/client'
 import popup from "./helpers/popup";
 import Backdrop from "./components/Backdrop";
 
-// import {createBackdrop} from "./styles";
-
-
 const ID = `bava-checkout-container-${new Date().toString()}`;
-let root: ReactDOM.Root;
 
 const getRoot = (): ReactDOM.Root  => {
-  if (root) {
-    return root;
-  }
-
   const body = document.querySelector("body");
   if (!body) {
     throw new Error("body is null");
   }
 
-  let container = document.getElementById(ID);
-  if (!container) {
-    container = document.createElement("div");
-    container.id = ID;
-    body.appendChild(container);
-  }
+  const container = document.createElement("div");
+  container.id = ID;
+  body.appendChild(container);
 
-  root = ReactDOM.createRoot(container);
-  return root;
+  return ReactDOM.createRoot(container);
 }
 
 
@@ -47,9 +35,9 @@ const BavaCheckoutOpen = ({ target, onClose }: OpenCheckoutOptions): void => {
 
   const win = popup({
     url: url.href,
-    title: "aa",
+    title: "Bava Checkout",
     w: 400,
-    h: 90,
+    h: 300,
   });
 
   const check = () => {

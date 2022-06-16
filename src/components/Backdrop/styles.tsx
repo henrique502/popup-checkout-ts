@@ -3,6 +3,11 @@ import LogoText from "../LogoText";
 import LogoIcon from "../LogoIcon";
 
 export const Container = styled.div`
+  @keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+  }
+
   display: block;
   position: fixed;
   top: 0;
@@ -19,6 +24,7 @@ export const Container = styled.div`
   animation-duration: 0.3s;
   animation-iteration-count: 1;
   animation-fill-mode: forwards !important;
+  animation: fadeIn 2s;
   opacity: 0;
   transform: translate3d(0, 0, 0);
   background-color: black;
@@ -57,10 +63,14 @@ export const Logo = styled.div`
 export const LogoIconArea = styled(LogoIcon)`
   height: 36px;
   margin-right: 10px;
+  display: inline-block;
+  max-width: 100%;
 `;
 
 export const LogoTextArea = styled(LogoText)`
   height: 36px;
+  display: inline-block;
+  max-width: 100%;
 `;
 
 export const Message = styled.div`
