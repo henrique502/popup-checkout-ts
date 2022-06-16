@@ -6,7 +6,7 @@ module.exports = defineConfig({
   plugins: [react()],
   build: {
     lib: {
-      entry: path.resolve(__dirname, 'src/main.ts'),
+      entry: path.resolve(__dirname, 'src/main.tsx'),
       name: 'BavaCheckout',
       fileName: (format) => `checkout.${format}.js`
     },
