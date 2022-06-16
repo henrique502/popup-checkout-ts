@@ -1,24 +1,9 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-
 import popup from "./helpers/popup";
-import Backdrop from "./components/Backdrop";
+import {
+  createOverlay,
+} from "./helpers/overlay";
 
 const ID = `bava-checkout-container-${new Date().toString()}`;
-
-const getRoot = (): ReactDOM.Root  => {
-  const body = document.querySelector("body");
-  if (!body) {
-    throw new Error("body is null");
-  }
-
-  const container = document.createElement("div");
-  container.id = ID;
-  body.appendChild(container);
-
-  return ReactDOM.createRoot(container);
-}
-
 
 export interface OpenCheckoutOptions {
   target: string;
@@ -26,10 +11,17 @@ export interface OpenCheckoutOptions {
 }
 
 const BavaCheckoutOpen = ({ target, onClose }: OpenCheckoutOptions): void => {
-  const root = getRoot();
+  const body = document.querySelector("body");
+  if (!body) {
+    throw new Error("body is null");
+  }
+
   const url = new URL(target);
-  const callback = () => {
-    root.unmount();
+  const callback = (element?: HTMLElement) => {
+    if (element) {
+      body.removeChild(element);
+    }
+
     onClose();
   }
 
@@ -49,14 +41,12 @@ const BavaCheckoutOpen = ({ target, onClose }: OpenCheckoutOptions): void => {
     callback();
   }
 
-  root.render(
-    <React.StrictMode>
-      <Backdrop
-        close={callback}
-        focus={() => { win.focus() }}
-      />
-    </React.StrictMode>
-  );
+  const overlay = createOverlay({
+    close: () => { callback(overlay); },
+    focus: () => { win.focus(); },
+  })
+
+  body.append(overlay);
 
   check();
 }
