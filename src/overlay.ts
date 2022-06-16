@@ -5,7 +5,7 @@ import {
   createLogoTextArea,
   createMessage,
   createModal
-} from "../styles";
+} from "./styles";
 
 
 export interface OverlayProps {
@@ -27,13 +27,13 @@ export const createOverlay = ({ focus, close }: OverlayProps) => {
     close();
   };
 
-  continueButton.nodeValue = "Clique para continuar";
+  continueButton.textContent = "Clique para continuar";
   continueButton.onclick = (event) => {
     event.preventDefault();
     focus();
   };
 
-  message.nodeValue = "Não vê o navegador seguro do Bava? Ajudaremos você a relançar a janela para que finalize sua compra";
+  message.textContent = "Não vê o navegador seguro do Bava? Ajudaremos você a relançar a janela para que finalize sua compra";
 
 
   container.append(closeButton);

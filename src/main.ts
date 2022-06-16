@@ -1,7 +1,7 @@
-import popup from "./helpers/popup";
+import popup from "./popup";
 import {
   createOverlay,
-} from "./helpers/overlay";
+} from "./overlay";
 
 const ID = `bava-checkout-container-${new Date().toString()}`;
 
@@ -16,10 +16,11 @@ const BavaCheckoutOpen = ({ target, onClose }: OpenCheckoutOptions): void => {
     throw new Error("body is null");
   }
 
+  let overlay: HTMLElement;
   const url = new URL(target);
-  const callback = (element?: HTMLElement) => {
-    if (element) {
-      body.removeChild(element);
+  const callback = () => {
+    if (overlay) {
+      overlay.remove();
     }
 
     onClose();
@@ -41,8 +42,8 @@ const BavaCheckoutOpen = ({ target, onClose }: OpenCheckoutOptions): void => {
     callback();
   }
 
-  const overlay = createOverlay({
-    close: () => { callback(overlay); },
+  overlay = createOverlay({
+    close: () => { callback(); },
     focus: () => { win.focus(); },
   })
 
