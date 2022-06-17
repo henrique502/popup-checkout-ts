@@ -188,7 +188,7 @@ class Service {
   }
   checkout(invoice) {
     if (this._popup) {
-      this._popup.location = `${this._endpoint}/invoices/${invoice}`;
+      this._popup.location = `${this._endpoint}/payment-link/#/${invoice}`;
     }
   }
   close() {
@@ -209,7 +209,7 @@ class Service {
     }
     this._onClose = config.onClose;
     this._popup = popup({
-      url: `${this._endpoint}/init`,
+      url: `${this._endpoint}/init.html`,
       title: "Bava Checkout",
       w: 400,
       h: 300
