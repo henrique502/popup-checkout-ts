@@ -51,7 +51,7 @@
 
 <div class="container">
   <form id="form">
-    <input type="text" id="target" value="" placeholder="00000000-0000-0000-0000-000000000000" required>
+    <input type="text" id="target" value="bcd4d391-cbc3-4fa1-9b1c-d4f72196c4b5" placeholder="00000000-0000-0000-0000-000000000000" required>
     <button id="popup">Popup</button>
     <button id="redirect">Redirect</button>
   </form>
@@ -91,10 +91,10 @@
 <script type="module" src="checkout.umd.js"></script>
 <script>
   const popup = document.getElementById("popup");
-  const redirect = document.getElementById("form");
-  const target = document.getElementById("redirect");
+  const redirect = document.getElementById("redirect");
+  const target = document.getElementById("target");
 
-  popup.onclick = function _onsubmit(e) {
+  popup.onclick = function _onclick(e) {
     e.preventDefault();
 
     BavaCheckout.setEnvironment('staging');
@@ -110,7 +110,7 @@
     }, 2000);
   };
 
-  redirect.onclick = function _onsubmit(e) {
+  redirect.onclick = function _onclick(e) {
     e.preventDefault();
 
     BavaCheckout.setEnvironment('staging');

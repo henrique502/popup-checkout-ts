@@ -198,7 +198,9 @@ class Service {
     }
   }
   redirect(invoice, config = {}) {
+    console.log(invoice);
     const target = new URL(`${this._endpoint}/payment-link/#/${invoice}`);
+    console.log(target.href);
     if (config.returnTo) {
       target.searchParams.append("returnTo", config.returnTo);
     }

@@ -74,7 +74,7 @@
   };
   }
 </pre>
-<pre>
+    <pre>
   redirect.onclick = function _onsubmit(e) {
     e.preventDefault();
 
@@ -91,10 +91,10 @@
 <script type="module" src="dist/checkout.umd.js"></script>
 <script>
   const popup = document.getElementById("popup");
-  const redirect = document.getElementById("form");
-  const target = document.getElementById("redirect");
+  const redirect = document.getElementById("redirect");
+  const target = document.getElementById("target");
 
-  popup.onclick = function _onsubmit(e) {
+  popup.onclick = function _onclick(e) {
     e.preventDefault();
 
     BavaCheckout.setEnvironment('staging');
@@ -110,7 +110,7 @@
     }, 2000);
   };
 
-  redirect.onclick = function _onsubmit(e) {
+  redirect.onclick = function _onclick(e) {
     e.preventDefault();
 
     BavaCheckout.setEnvironment('staging');
