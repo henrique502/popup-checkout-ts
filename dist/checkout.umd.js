@@ -2,6 +2,7 @@
     toolbar=no,
     location=no,
     directories=no,
+    modal=yes,
     status=no,
     menubar=no,
     scrollbars=yes,

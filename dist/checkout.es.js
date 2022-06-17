@@ -26,6 +26,7 @@ const popup = ({ win, url, title, w, h }) => {
     toolbar=no,
     location=no,
     directories=no,
+    modal=yes,
     status=no,
     menubar=no,
     scrollbars=yes,
