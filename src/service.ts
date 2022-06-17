@@ -1,6 +1,6 @@
 import {
   Checkout,
-  CheckoutConfig,
+  CheckoutConfig, CheckoutRedirectConfig,
   Endpoint,
   Environment,
 } from "./types";
@@ -49,6 +49,18 @@ class Service implements Checkout {
     if (this._popup) {
       this._popup.location = `${this._endpoint}/payment-link/#/${invoice}`;
     }
+  }
+
+  redirect(invoice: string, config: CheckoutRedirectConfig = {}): void {
+    const target = new URL(`${this._endpoint}/payment-link/#/${invoice}`);
+
+    if (config.returnTo) {
+      target.searchParams.append("returnTo", config.returnTo);
+    }
+
+    console.log(target.href);
+
+    // window.location.href = target.href;
   }
 
   close(): void {

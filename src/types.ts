@@ -14,6 +14,10 @@ export interface CheckoutConfig {
   onClose: () => void;
 }
 
+export interface CheckoutRedirectConfig {
+  returnTo?: string
+}
+
 export interface OverlayProps {
   focus: () => void;
   close: () => void;
@@ -22,6 +26,7 @@ export interface OverlayProps {
 export interface Checkout {
   open: (config: CheckoutConfig) => void;
   checkout: (invoice: string) => void;
+  redirect: (invoice: string, config?: CheckoutRedirectConfig) => void;
   close: () => void;
   isOpen: () => boolean;
   setEnvironment: (development: Environment) => void;
