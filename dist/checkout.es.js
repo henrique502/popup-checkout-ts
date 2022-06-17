@@ -16,21 +16,26 @@ var Endpoint = /* @__PURE__ */ ((Endpoint2) => {
   Endpoint2["Production"] = "https://pay.bavabank.com";
   return Endpoint2;
 })(Endpoint || {});
-const popup = ({ url, title, w, h }) => {
-  const dualScreenLeft = window.screenLeft !== void 0 ? window.screenLeft : window.screenX;
-  const dualScreenTop = window.screenTop !== void 0 ? window.screenTop : window.screenY;
-  const width = window.innerWidth ? window.innerWidth : document.documentElement.clientWidth ? document.documentElement.clientWidth : screen.width;
-  const height = window.innerHeight ? window.innerHeight : document.documentElement.clientHeight ? document.documentElement.clientHeight : screen.height;
-  const systemZoom = width / window.screen.availWidth;
-  const left = (width - w) / 2 / systemZoom + dualScreenLeft;
-  const top = (height - h) / 2 / systemZoom + dualScreenTop;
-  const newWindow = window.open(url, title, `
-      scrollbars=yes,
-      width=${w / systemZoom},
-      height=${h / systemZoom},
-      top=${top},
-      left=${left}
-     `);
+const popup = ({ win, url, title, w, h }) => {
+  if (!win.top) {
+    throw new Error("win.top is null");
+  }
+  const y = win.top.outerHeight / 2 + win.top.screenY - h / 2;
+  const x = win.top.outerWidth / 2 + win.top.screenX - w / 2;
+  const newWindow = win.open(url, title, `
+    toolbar=no,
+    location=no,
+    directories=no,
+    status=no,
+    menubar=no,
+    scrollbars=yes,
+    resizable=yes,
+    copyhistory=no,
+    width=${w},
+    height=${h},
+    top=${y},
+    left=${x}
+   `);
   if (newWindow === null) {
     throw new Error("cannot open popup");
   }
@@ -209,10 +214,11 @@ class Service {
     }
     this._onClose = config.onClose;
     this._popup = popup({
+      win: window,
       url: `${this._endpoint}/init.html`,
       title: "Bava Checkout",
-      w: 400,
-      h: 300
+      w: 1230,
+      h: 730
     });
     this._overlay = createOverlay({
       close: () => {

@@ -74,10 +74,11 @@ class Service implements Checkout {
 
     this._onClose = config.onClose;
     this._popup = popup({
+      win: window,
       url: `${this._endpoint}/init.html`,
       title: "Bava Checkout",
-      w: 400,
-      h: 300,
+      w: 1230,
+      h: 730,
     });
 
     this._overlay = createOverlay({
