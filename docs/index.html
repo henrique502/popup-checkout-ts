@@ -52,6 +52,11 @@
 <div class="container">
   <form id="form">
     <input type="text" id="target" value="bcd4d391-cbc3-4fa1-9b1c-d4f72196c4b5" placeholder="00000000-0000-0000-0000-000000000000" required>
+    <select id="environment">
+      <option>development</option>
+      <option>staging</option>
+      <option>production</option>
+    </select>
     <button id="popup">Popup</button>
     <button id="redirect">Redirect</button>
   </form>
@@ -60,7 +65,7 @@
   popup.onclick = function _onclick(e) {
     e.preventDefault();
 
-    BavaCheckout.setEnvironment('staging');
+    BavaCheckout.setEnvironment('development');
     BavaCheckout.open({
       onClose: () => {
         alert("BavaCheckoutOpen: is closed")
@@ -89,15 +94,17 @@
 </div>
 
 <script type="module" src="checkout.umd.js"></script>
+
 <script>
   const popup = document.getElementById("popup");
+  const environment = document.getElementById("environment");
   const redirect = document.getElementById("redirect");
   const target = document.getElementById("target");
 
   popup.onclick = function _onclick(e) {
     e.preventDefault();
 
-    BavaCheckout.setEnvironment('staging');
+    BavaCheckout.setEnvironment(environment.value);
     BavaCheckout.open({
       onClose: () => {
         alert("onClose is called")
@@ -113,7 +120,7 @@
   redirect.onclick = function _onclick(e) {
     e.preventDefault();
 
-    BavaCheckout.setEnvironment('staging');
+    BavaCheckout.setEnvironment(environment.value);
 
     BavaCheckout.redirect(target.value, {
       returnTo: window.location.origin,
