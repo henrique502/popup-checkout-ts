@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="br">
+
+<head>
+  <link rel="icon" type="image/png" sizes="32x32"
+        href="https://cdn.bavabank.com/vendors/c33312e6-5206-4958-9dea-2b711ec415e5/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96"
+        href="https://cdn.bavabank.com/vendors/c33312e6-5206-4958-9dea-2b711ec415e5/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16"
+        href="https://cdn.bavabank.com/vendors/c33312e6-5206-4958-9dea-2b711ec415e5/favicon-16x16.png">
+
+  <meta charset="utf-8" />
+  <meta name="robots" content="none" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#FAFAFA" />
+  <title>Bava Checkout SDK</title>
+
+  <style>
+    body { padding: 0 }
+    .container {
+      display: grid;
+      grid-template-columns: 1fr;
+      grid-template-rows: 90px 1fr;
+      grid-column-gap: 0px;
+      grid-row-gap: 0px;
+      height: 100vh;
+      max-width: 400px;
+      justify-content: center;
+      align-content: center;
+      margin: 0 auto;
+    }
+
+    .container > form {
+      text-align: center;
+      padding: 30px;
+    }
+
+    .container > form > input {
+      width: 200px;
+    }
+
+    .container > div > pre {
+      background-color: beige;
+      padding: 5px;
+      border: solid 2px burlywood;
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="container">
+  <form id="form">
+    <input type="text" id="target" value="bcd4d391-cbc3-4fa1-9b1c-d4f72196c4b5" placeholder="00000000-0000-0000-0000-000000000000" required>
+    <button id="popup">Popup</button>
+    <button id="redirect">Redirect</button>
+  </form>
+  <div>
+<pre>
+  popup.onclick = function _onclick(e) {
+    e.preventDefault();
+
+    BavaCheckout.setEnvironment('development');
+    BavaCheckout.open({
+      onClose: () => {
+        alert("BavaCheckoutOpen: is closed")
+      },
+    });
+
+    // Make ajax to backend and retrive invoice id
+    setTimeout(() => {
+      BavaCheckout.checkout(target.value);
+    }, 2000);
+  };
+  }
+</pre>
+    <pre>
+  redirect.onclick = function _onsubmit(e) {
+    e.preventDefault();
+
+    BavaCheckout.setEnvironment('staging');
+
+    BavaCheckout.redirect(target.value, {
+      returnTo: window.location.origin,
+    });
+  };
+</pre>
+  </div>
+</div>
+
+<script type="module" src="https://cdn.bavabank.com/libs/checkout/v0.1/checkout.umd.js"></script>
+<script>
+  const popup = document.getElementById("popup");
+  const redirect = document.getElementById("redirect");
+  const target = document.getElementById("target");
+
+  popup.onclick = function _onclick(e) {
+    e.preventDefault();
+
+    BavaCheckout.setEnvironment('development');
+    BavaCheckout.open({
+      onClose: () => {
+        alert("onClose is called")
+      },
+    });
+
+    // Make ajax to backend and retrive invoice id
+    setTimeout(() => {
+      BavaCheckout.checkout(target.value);
+    }, 2000);
+  };
+
+  redirect.onclick = function _onclick(e) {
+    e.preventDefault();
+
+    BavaCheckout.setEnvironment('staging');
+
+    BavaCheckout.redirect(target.value, {
+      returnTo: window.location.origin,
+    });
+  };
+</script>
+</body>
+
+</html>
